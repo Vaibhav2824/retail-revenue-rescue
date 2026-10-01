@@ -12,7 +12,7 @@ weekly decision cadence, about 1M rows/year growing. Must be explainable to a no
 | ML tracking | **MLflow** | Azure ML; SageMaker | Built into the platform. Every score in gold carries the `model_run_id` that produced it. |
 | Model | **Gradient-boosted trees (scikit-learn)** | Logistic regression; deep learning | Handles skewed spend data without manual transforms. ~3k training rows doesn't need distributed ML or deep learning. |
 | BI | **Power BI** | Tableau; Databricks AI/BI dashboards | Most common at UK enterprise clients and familiar to the sponsor's team. Tableau would be equally valid if the client already licensed it. |
-| GenAI | **LangChain + Groq-hosted Llama** | Azure OpenAI; Databricks Genie | Provider-agnostic: swapping to Azure OpenAI is a one-line change in `assistant/core.py` (`_llm()`). Free tier for the proof of concept. |
+| GenAI | **LangChain + Groq-hosted gpt-oss-120b** | Azure OpenAI; Databricks Genie | Provider-agnostic: swapping to Azure OpenAI is a one-line change in `assistant/core.py` (`_llm()`). Free tier for the proof of concept. |
 
 ## Consequences
 - **Vendor lock-in is limited:** the transforms are plain PySpark functions (tested locally without Databricks), and the gold tables are Delta/Parquet that any engine can read.

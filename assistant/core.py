@@ -103,7 +103,7 @@ def _llm():
 
     if not os.getenv("GROQ_API_KEY"):
         raise RuntimeError("GROQ_API_KEY is not set. Copy .env.example to .env and add your free key from console.groq.com")
-    return ChatGroq(model=os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile"), temperature=0)
+    return ChatGroq(model=os.getenv("GROQ_MODEL", "openai/gpt-oss-120b"), temperature=0)
 
 
 def generate_sql(question: str, error: str = "") -> str:

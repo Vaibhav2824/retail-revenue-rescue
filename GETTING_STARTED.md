@@ -69,7 +69,7 @@ Follow [`powerbi/BUILD_GUIDE.md`](powerbi/BUILD_GUIDE.md). Save `powerbi/retail_
    copy .env.example .env      # then paste your key into .env
    streamlit run assistant/app.py
    ```
-3. Try the example buttons. Then try something malicious like *"delete all customers"* and watch it get blocked.
+3. Try the example buttons. Then try *"delete all customers"*: the model only writes SELECTs, and if it ever didn't, the guard blocks it (proved by `tests/test_guard.py`).
 4. `python -m assistant.eval` → writes `assistant/eval_results.md`. Commit it, and put the accuracy into your CV bullet.
    - If Groq says the model is decommissioned, set `GROQ_MODEL` in `.env` to a current model from console.groq.com/docs/models.
 5. *(Optional, impressive)* Point it at Databricks instead of local files. Fill the `DATABRICKS_*` values in `.env` (same hostname, path and token as in the Power BI guide) and restart.
@@ -90,7 +90,7 @@ Follow [`powerbi/BUILD_GUIDE.md`](powerbi/BUILD_GUIDE.md). Save `powerbi/retail_
 | 0:20 | Databricks job graph + lineage | "Four-step pipeline on Databricks: bronze, silver, gold, model. Unity Catalog tracks lineage. Bad rows are quarantined with a reason, never deleted." |
 | 0:55 | Power BI page 2 | "Leakage looked like it doubled in 2011. Drilling in, a third of it was two keying errors reversed within minutes. Underlying leakage was flat. So the fix is a cheap order-entry check, not an investigation." |
 | 1:40 | Power BI page 3 | "The churn model beats the rule they already use: AUC 0.76 vs 0.71 on a later period it never saw. £1.27M is at risk, and 100 customers hold £203k of it. This is the call list." |
-| 2:15 | Assistant | Ask one question, open "SQL used", then show a blocked query. "Managers can self-serve, and every answer shows its SQL." |
+| 2:15 | Assistant | Ask one question and open "SQL used". Mention the read-only guard and its tests. "Managers can self-serve, and every answer shows its SQL." |
 | 2:45 | Deck last slide | "Recommendation, the £ scenario, and next phase: add margin data and A/B-test the retention calls." |
 
 ## 6. Interview prep (1 h)
@@ -111,4 +111,4 @@ Follow [`powerbi/BUILD_GUIDE.md`](powerbi/BUILD_GUIDE.md). Save `powerbi/retail_
 - Built an end-to-end Databricks lakehouse (Unity Catalog, medallion architecture, Workflows) over 1.07M retail transactions, with a data-quality gate and quarantine; PySpark transforms unit-tested in CI.
 - Found that 34% of cancellation value came from two order-entry errors, reframing an apparent 2× rise in revenue leakage as flat, and recommended a zero-cost order-entry control.
 - Developed an MLflow-tracked churn model validated out-of-time (AUC 0.76 vs 0.71 for the existing business rule), quantifying £1.27M revenue at risk and a 100-customer call list holding £203k.
-- Shipped a LangChain text-to-SQL assistant over governed tables with a read-only guard, scoring __% on a 10-question evaluation set; built a 3-page Power BI dashboard with DAX.
+- Shipped a LangChain text-to-SQL assistant over governed tables with a read-only guard, scoring 100% (10/10) on a 10-question evaluation set; built a 3-page Power BI dashboard with DAX.

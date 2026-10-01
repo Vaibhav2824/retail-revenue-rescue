@@ -2,7 +2,7 @@
 
 **An end-to-end data & AI consulting engagement on real retail data: from a client question to a governed lakehouse, a churn model, a Power BI dashboard and a GenAI assistant, ending in a recommendation with a £ figure.**
 
-`Databricks` · `Unity Catalog` · `Delta / medallion` · `Databricks Workflows` · `PySpark` · `MLflow` · `scikit-learn` · `Power BI / DAX` · `LangChain` · `Llama 3.3 (Groq)` · `DuckDB` · `pytest + GitHub Actions`
+`Databricks` · `Unity Catalog` · `Delta / medallion` · `Databricks Workflows` · `PySpark` · `MLflow` · `scikit-learn` · `Power BI / DAX` · `LangChain` · `gpt-oss-120b (Groq)` · `DuckDB` · `pytest + GitHub Actions`
 
 > 🎥 **3-minute demo:** _add your video link here_ · 📊 **Findings deck:** [`deck/`](deck/)
 
