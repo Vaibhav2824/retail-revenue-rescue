@@ -47,8 +47,11 @@ with mlflow.start_run(run_name="hgb-out-of-time") as run:
 
     model = churn.train(test_snap)  # refit on the most recent labelled snapshot before scoring
     X = test_snap[churn.FEATURES]
+    # MLflow 3 saves sklearn models with skops, which only reloads allow-listed types. TreePredictor is the
+    # internal tree of the model we just trained in this run, so trusting it is safe (never do this for downloaded models).
     mlflow.sklearn.log_model(model, name="model", signature=infer_signature(X, model.predict_proba(X)[:, 1]),
-                             input_example=X.head(3))
+                             input_example=X.head(3),
+                             skops_trusted_types=["sklearn.ensemble._hist_gradient_boosting.predictor.TreePredictor"])
 print(metrics)
 
 # COMMAND ----------
