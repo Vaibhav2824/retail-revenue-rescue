@@ -1,0 +1,22 @@
+[
+  {"question": "What was total net revenue in 2011?",
+   "sql": "SELECT ROUND(SUM(net_revenue), 2) AS net_revenue FROM gold_monthly_kpis WHERE month >= DATE '2011-01-01' AND month < DATE '2012-01-01'"},
+  {"question": "Which 5 countries outside the United Kingdom had the highest gross revenue?",
+   "sql": "SELECT country, ROUND(SUM(gross_revenue), 2) AS gross_revenue FROM gold_monthly_kpis WHERE country <> 'United Kingdom' GROUP BY country ORDER BY gross_revenue DESC LIMIT 5"},
+  {"question": "What percentage of gross revenue was lost to cancellations over the whole period?",
+   "sql": "SELECT ROUND(100 * SUM(cancelled_value) / SUM(gross_revenue), 2) AS leakage_pct FROM gold_monthly_kpis"},
+  {"question": "Which single month had the highest net revenue across all countries?",
+   "sql": "SELECT month, ROUND(SUM(net_revenue), 2) AS net_revenue FROM gold_monthly_kpis GROUP BY month ORDER BY net_revenue DESC LIMIT 1"},
+  {"question": "How many customers are in each RFM segment?",
+   "sql": "SELECT segment, COUNT(*) AS customers FROM gold_customer_rfm GROUP BY segment"},
+  {"question": "What is the total revenue at risk from customer churn?",
+   "sql": "SELECT ROUND(SUM(revenue_at_risk), 2) AS revenue_at_risk FROM gold_customer_churn_risk"},
+  {"question": "List the 10 customers with the highest revenue at risk.",
+   "sql": "SELECT customer_id, ROUND(revenue_at_risk, 2) AS revenue_at_risk FROM gold_customer_churn_risk ORDER BY revenue_at_risk DESC LIMIT 10"},
+  {"question": "Which 5 products lost the most money to cancellations?",
+   "sql": "SELECT stock_code, description, cancelled_value FROM gold_product_performance ORDER BY cancelled_value DESC LIMIT 5"},
+  {"question": "How many active customers have a churn probability above 50%?",
+   "sql": "SELECT COUNT(*) AS customers FROM gold_customer_churn_risk WHERE churn_probability > 0.5"},
+  {"question": "Which country has the most customers in the At Risk segment?",
+   "sql": "SELECT country, COUNT(*) AS customers FROM gold_customer_rfm WHERE segment = 'At Risk' GROUP BY country ORDER BY customers DESC LIMIT 1"}
+]

@@ -1,0 +1,24 @@
+// Paste each as a New measure (Home -> New measure). Ratios are ratio-of-sums so they stay correct at any grain.
+
+// --- gold_monthly_kpis ---
+Gross Revenue = SUM ( gold_monthly_kpis[gross_revenue] )
+Cancelled Value = SUM ( gold_monthly_kpis[cancelled_value] )
+Net Revenue = SUM ( gold_monthly_kpis[net_revenue] )
+Leakage % = DIVIDE ( [Cancelled Value], [Gross Revenue] )
+Orders = SUM ( gold_monthly_kpis[orders] )
+Avg Order Value = DIVIDE ( [Gross Revenue], [Orders] )
+Net Revenue YoY % =
+    VAR PriorYear = CALCULATE ( [Net Revenue], DATEADD ( Calendar[Date], -1, YEAR ) )
+    RETURN DIVIDE ( [Net Revenue] - PriorYear, PriorYear )
+
+// --- gold_product_performance ---
+Product Gross Revenue = SUM ( gold_product_performance[gross_revenue] )
+Product Cancelled Value = SUM ( gold_product_performance[cancelled_value] )
+Product Cancel Rate = DIVIDE ( [Product Cancelled Value], [Product Gross Revenue] )
+
+// --- gold_customer_rfm / gold_customer_churn_risk ---
+Customers in Segment = COUNTROWS ( gold_customer_rfm )
+Active Customers = COUNTROWS ( gold_customer_churn_risk )
+Revenue at Risk = SUM ( gold_customer_churn_risk[revenue_at_risk] )
+High-Risk Customers = CALCULATE ( COUNTROWS ( gold_customer_churn_risk ), gold_customer_churn_risk[churn_probability] >= 0.5 )
+Revenue at Risk (High-Risk) = CALCULATE ( [Revenue at Risk], gold_customer_churn_risk[churn_probability] >= 0.5 )

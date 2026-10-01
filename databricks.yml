@@ -1,0 +1,29 @@
+# Job-as-code (Databricks Asset Bundle). Optional: the README also shows how to create the same job in the UI.
+#   databricks bundle deploy && databricks bundle run retail_pipeline
+bundle:
+  name: retail-revenue-rescue
+
+resources:
+  jobs:
+    retail_pipeline:
+      name: retail-revenue-rescue-pipeline
+      parameters:
+        - {name: catalog, default: workspace}
+        - {name: schema, default: retail}
+      tasks:
+        - task_key: bronze
+          notebook_task: {notebook_path: ./notebooks/01_bronze.py}
+        - task_key: silver
+          depends_on: [{task_key: bronze}]
+          notebook_task: {notebook_path: ./notebooks/02_silver.py}
+        - task_key: gold
+          depends_on: [{task_key: silver}]
+          notebook_task: {notebook_path: ./notebooks/03_gold.py}
+        - task_key: churn_model
+          depends_on: [{task_key: gold}]
+          notebook_task: {notebook_path: ./notebooks/04_churn_model.py}
+
+targets:
+  dev:
+    mode: development
+    default: true
