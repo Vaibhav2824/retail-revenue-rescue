@@ -53,5 +53,5 @@ Use one colour for "good" (net revenue) and one accent for "risk" (leakage, chur
 > ✅ **Checkpoint:** say in one sentence what the retention team should do on Monday morning using page 3.
 
 ## 4. Finish
-- **View → Themes**: pick a clean light theme. Same font sizes on every page.
+- **View → Themes → Browse for themes** → `powerbi/theme.json` (matches the deck colours).
 - Screenshot each page into `docs/img/` (`overview.png`, `leakage.png`, `churn.png`). The README links to them.

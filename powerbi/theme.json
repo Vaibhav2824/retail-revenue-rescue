@@ -1,0 +1,17 @@
+{
+  "name": "Retail Revenue Rescue",
+  "dataColors": ["#1F8A70", "#D1495B", "#E9B44C", "#4A5563", "#9AA5B1", "#6FB7A3", "#E58C98", "#1B2430"],
+  "foreground": "#1B2430",
+  "foregroundNeutralSecondary": "#4A5563",
+  "background": "#FFFFFF",
+  "backgroundLight": "#F2F4F7",
+  "tableAccent": "#1F8A70",
+  "good": "#1F8A70",
+  "bad": "#D1495B",
+  "neutral": "#E9B44C",
+  "textClasses": {
+    "title": { "fontFace": "Segoe UI Semibold", "fontSize": 14, "color": "#1B2430" },
+    "callout": { "fontFace": "Segoe UI Semibold", "fontSize": 28, "color": "#1B2430" },
+    "label": { "fontFace": "Segoe UI", "fontSize": 10, "color": "#4A5563" }
+  }
+}
