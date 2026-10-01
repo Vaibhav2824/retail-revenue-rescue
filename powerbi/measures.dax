@@ -5,8 +5,8 @@ Gross Revenue = SUM ( gold_monthly_kpis[gross_revenue] )
 Cancelled Value = SUM ( gold_monthly_kpis[cancelled_value] )
 Net Revenue = SUM ( gold_monthly_kpis[net_revenue] )
 Leakage % = DIVIDE ( [Cancelled Value], [Gross Revenue] )
-Orders = SUM ( gold_monthly_kpis[orders] )
-Avg Order Value = DIVIDE ( [Gross Revenue], [Orders] )
+Total Orders = SUM ( gold_monthly_kpis[orders] )  // not "Orders": Power BI names are case-insensitive and would clash with the orders column
+Avg Order Value = DIVIDE ( [Gross Revenue], [Total Orders] )
 Net Revenue YoY % =
     VAR PriorYear = CALCULATE ( [Net Revenue], DATEADD ( Calendar[Date], -1, YEAR ) )
     RETURN DIVIDE ( [Net Revenue] - PriorYear, PriorYear )
